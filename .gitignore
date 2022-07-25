@@ -1,0 +1,11 @@
+# Node artifact files
+node_modules/
+# Log files
+*.log
+# JetBrains IDE
+.idea/
+# .env files
+# .env.development
+.env
+# Other
+package-lock.json
