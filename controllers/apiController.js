@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const store = require('../store');
 
 /**
  * Функція для отримання актуального курсу BTC-UAH зі стороннього сервісу
@@ -22,10 +23,20 @@ const rateAction = async (req, res) => {
   }
 };
 
+/**
+ * Функція-мідлвер для додавання email в список
+ */
 const subscribeAction = async (req, res) => {
-
+  const { email } = req.body;
+  if (store.has(email)) {
+    res.status(409).json({ description: "E-mail вже є в базі даних (файловій)" });
+    return;
+  }
+  store.append(email);
+  res.json({ description: "E-mail додано" });
 };
 
 module.exports = {
-  rateAction
+  rateAction,
+  subscribeAction
 };
