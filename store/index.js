@@ -8,12 +8,24 @@ class Store {
    * @param {string} storePath - абсолютний шлях до файлу сховища
    */
   constructor(storePath = path.join(__dirname, './store')) {
-
-    // ToDo створення файлу store, якщо його немає
-    // ToDo replace /n, /r
-    this.storePath = storePath;
-    this.cache = fs.readFileSync(storePath, 'utf8').split(';');
+    this.init(storePath);
+    this.cache = fs.readFileSync(storePath, 'utf8')
+      .replace(/\n/g,'')
+      .split(';');
     this.cache.pop();
+    this.storePath = storePath;
+  }
+
+  /**
+   * Створює файл-сховище, якщо відсутній
+   * @param {string} storePath - абсолютний шлях до файлу
+   */
+  init(storePath) {
+    try {
+      fs.accessSync(storePath, fs.constants.F_OK);
+    } catch (err) {
+      fs.writeFileSync(storePath, '');
+    }
   }
 
   /**

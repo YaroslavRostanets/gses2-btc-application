@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-
+require('dotenv').config()
 const app = require('../app');
 const debug = require('debug')('gses2-btc-application:server');
 const http = require('http');

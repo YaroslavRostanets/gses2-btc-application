@@ -9,5 +9,6 @@ router.post('/subscribe', [
   bodyParser.urlencoded({ extended: true }),
   apiController.subscribeAction
 ]);
+router.post('/sendEmails', apiController.sendEmailsAction);
 
 module.exports = router;
