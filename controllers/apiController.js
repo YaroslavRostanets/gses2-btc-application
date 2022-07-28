@@ -4,13 +4,21 @@ const transport = require('../modules/mailer');
 
 /**
  * Функція для отримання актуального курсу BTC-UAH зі стороннього сервісу
- * @returns {Promise<string>} Проміс повертає актуальний курс BTC-UAH у випадку resolve
+ * @returns {function} Проміс повертає актуальний курс BTC-UAH у випадку resolve
  */
-const getCurrentRate = async () => {
-  // ToDo - мемоізацію курсу
-  const res = await fetch('https://api.coingate.com/v2/rates/merchant/btc/uah');
-  return await res.text();
-};
+const getCurrentRate = (() => {
+  let rate = null;
+  let updatedAt = null;
+  return async () => {
+    const now = Math.round(Date.now()/1000);
+    if (!rate || (now - updatedAt > 60)) {
+      const res = await fetch('https://api.coingate.com/v2/rates/merchant/btc/uah');
+      rate = await res.text();
+      updatedAt = now;
+    }
+    return rate;
+  }
+})();
 
 /**
  * Функція-мідлвер для отримання актуального курсу BTC-UAH
@@ -19,7 +27,10 @@ const rateAction = async (req, res) => {
   // Перехоплення помилки на випадок недоступності стороннього сервісу
   try {
     const rate = await getCurrentRate();
-    res.json({rate});
+    res.json({
+      rate,
+      description: `1BTC = ${rate}UAH`
+    });
   } catch (err) {
     res.status(500).json();
   }
@@ -50,7 +61,7 @@ const sendActualRate = (email, rate) => {
     from: process.env.SMTP_USER,
     to: email,
     subject: "Актуальний курс BTC-UAH",
-    text: `Актуальний курс: ${rate}`
+    text: `Актуальний курс: ${rate}. 1BTC = ${rate}UAH`
   });
 };
 

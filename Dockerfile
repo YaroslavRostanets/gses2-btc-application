@@ -5,9 +5,7 @@ RUN apt-get update && \
     apt-get -y install \
             git \
             curl \
-            nano \
-            unzip
-
+            nano
 RUN mkdir -p /var/app
 WORKDIR /var/app
 COPY . .
