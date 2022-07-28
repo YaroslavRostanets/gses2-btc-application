@@ -5,7 +5,5 @@ node_modules/
 # JetBrains IDE
 .idea/
 # .env files
-# .env.development
-.env
 # Other
 package-lock.json
