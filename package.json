@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "docs": "apidoc -e node_modules/ -i routes/ -o docs/"
   },
   "dependencies": {
     "debug": "~2.6.9",
@@ -14,5 +15,8 @@
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.7.7",
     "nodemailer-smtp-transport": "^2.7.4"
+  },
+  "devDependencies": {
+    "apidoc": "^0.52.0"
   }
 }

@@ -3,7 +3,6 @@ const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 const apiRouter = require('./routes/api');
-
 const app = express();
 
 app.use(logger('dev', {
@@ -19,7 +18,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// app.use('/docs', express.static('docs'));
+app.use('/docs', express.static('docs'));
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

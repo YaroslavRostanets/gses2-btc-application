@@ -1,0 +1,12 @@
+{
+  "name": "gses2-btc-application",
+  "version": "0.1.0",
+  "description": "GSES2 BTC API",
+  "template": {
+    "withCompare": true,
+    "withGenerator": true,
+    "forceLanguage": "en"
+  },
+  "title": "gses2-btc-application",
+  "sampleUrl": null
+}
