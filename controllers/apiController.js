@@ -16,7 +16,7 @@ const getCurrentRate = (() => {
       rate = await res.text();
       updatedAt = now;
     }
-    return rate;
+    return Number(rate);
   }
 })();
 
