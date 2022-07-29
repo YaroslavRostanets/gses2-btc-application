@@ -60,13 +60,13 @@ module.exports = router;
  * @apiGroup API
  *
  * @apiSuccess {Object} result
- * @apiSuccess {String} result.rate Actual exchange rate
+ * @apiSuccess {Number} result.rate Actual exchange rate
  * @apiSuccess {String} result.description Rate description
  *
  * @apiSuccessExample {json} Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "rate": "869376.32",
+ *       "rate": 869376.32,
  *       "description": "1BTC = 869376.32UAH"
  *     }
  */

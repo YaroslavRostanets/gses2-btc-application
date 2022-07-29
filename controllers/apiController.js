@@ -4,7 +4,7 @@ const transport = require('../modules/mailer');
 
 /**
  * Функція для отримання актуального курсу BTC-UAH зі стороннього сервісу
- * @returns {function} Проміс повертає актуальний курс BTC-UAH у випадку resolve
+ * @returns {function} Функція, що повертає проміс з актуальним курсом BTC-UAH у випадку resolve
  */
 const getCurrentRate = (() => {
   let rate = null;
