@@ -27,10 +27,7 @@ const rateAction = async (req, res) => {
   // Перехоплення помилки на випадок недоступності стороннього сервісу
   try {
     const rate = await getCurrentRate();
-    res.json({
-      rate,
-      description: `1BTC = ${rate}UAH`
-    });
+    res.json(rate);
   } catch (err) {
     res.status(500).json();
   }
